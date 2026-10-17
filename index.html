@@ -127,7 +127,7 @@
           <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Check Clash</li>
           <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Workset Owner</li>
         </ul>
-        <a href="contact.html" class="mt-6 block text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 rounded-lg transition">Liên hệ →</a>
+        <a id="free-download-btn" href="#" class="mt-6 block text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 rounded-lg transition">Download ↓</a>
       </div>
 
       <!-- PRO -->
@@ -210,5 +210,38 @@
     </div>
   </footer>
 
+  <script>
+    // Update the FREE_DOWNLOAD_URL value in download_urls.txt to change the Free download link.
+    (async function () {
+      const button = document.getElementById('free-download-btn');
+      if (!button) return;
+
+      try {
+        const response = await fetch('download_urls.txt', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Could not load download_urls.txt');
+        const content = await response.text();
+        const line = content.split(/\r?\n/).find(row => row.trim().startsWith('FREE_DOWNLOAD_URL='));
+        const url = line ? line.substring(line.indexOf('=') + 1).trim() : '';
+
+        if (url && /^https?:\/\//i.test(url) && !url.includes('example.com/your-free-download.zip')) {
+          button.href = url;
+          button.target = '_blank';
+          button.rel = 'noopener noreferrer';
+        } else {
+          button.href = '#';
+          button.addEventListener('click', function (event) {
+            event.preventDefault();
+            alert('Hãy cập nhật FREE_DOWNLOAD_URL trong file download_urls.txt trước khi sử dụng nút Download.');
+          });
+        }
+      } catch (error) {
+        button.href = '#';
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          alert('Không đọc được download_urls.txt. Hãy đảm bảo file này nằm cùng thư mục với index.html và đã được tải lên GitHub Pages.');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
