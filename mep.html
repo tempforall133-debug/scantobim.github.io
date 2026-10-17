@@ -3,139 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scan to MEP Tools - pyRevit Extension</title>
+  <title>Scan for MEP - pyRevit Tool</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+<body class="bg-slate-900 text-slate-100 font-sans">
 
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="index.html" class="text-xl font-bold text-white flex items-center gap-2">
-        <i class="fa-solid fa-arrow-left text-sm text-cyan-400"></i> Trang chủ / <span class="text-cyan-400">Scan for MEP</span>
+        <i class="fa-solid fa-arrow-left text-sm text-blue-400"></i> Trang chủ / <span class="text-cyan-400">Scan for MEP</span>
       </a>
-      <a href="index.html#pricing" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Bảng Giá Tool</a>
+      <a href="index.html#pricing" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Mua Tool</a>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <!-- HERO SECTION -->
-    <div class="text-center mb-12">
-      <span class="text-cyan-400 font-bold text-sm tracking-widest uppercase bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">pyRevit MEP Extension</span>
-      <h1 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Bộ Công Cụ Scan to MEP pyRevit</h1>
-      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-        Tối ưu hóa tốc độ dựng mô hình Cơ Điện, kiểm tra va chạm và xử lý Point Cloud chuyên nghiệp trong Revit.
-      </p>
-    </div>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <span class="text-cyan-400 font-bold text-sm tracking-widest uppercase">MEP Module</span>
+    <h1 class="text-3xl md:text-5xl font-extrabold text-white mt-2 mb-6">Scan for MEP pyRevit Tools</h1>
+    <p class="text-slate-400 text-lg mb-8">
+      Bộ công cụ hỗ trợ dựng mô hình cơ điện (Ống nước, Ống gió, Thang máng điện) tự động dựa trên mây điểm Point Cloud trong Revit.
+    </p>
 
-    <!-- RIBBON OVERVIEW CONTAINER -->
-    <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 mb-12 shadow-2xl">
-      <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-        <i class="fa-solid fa-layer-group text-cyan-400"></i> Thanh Ribbon pyRevit Thực Tế
-      </h2>
-      <div class="overflow-x-auto rounded-xl border border-slate-700 bg-slate-950 p-3">
-        <p class="text-xs text-slate-400 mb-2">Hình ảnh các nút công cụ tích hợp trực tiếp trên Revit:</p>
-        <!-- Ảnh Ribbon từ máy bạn -->
-        <img src="mep-ribbon.png" alt="pyRevit MEP Ribbon Tools" class="w-full min-w-[900px] object-contain rounded-lg">
+    <!-- DEMO PLACEHOLDER -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl h-64 md:h-80 flex items-center justify-center mb-12">
+      <div class="text-center text-slate-500">
+        <i class="fa-solid fa-circle-play text-5xl mb-3"></i>
+        <p>Đặt Video GIF / Hình ảnh demo thao tác tool tại đây</p>
       </div>
-      <p class="text-xs text-slate-500 mt-2 text-right">* Tải file ảnh ribbon lên GitHub đặt tên là <code>mep-ribbon.png</code> để hiển thị chuẩn.</p>
     </div>
 
-    <!-- LIST CÁC PANEL & BUTTONS -->
-    <h2 class="text-2xl font-bold text-white mb-8 border-b border-slate-800 pb-4">Chi Tiết Các Nhóm Tính Năng</h2>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    <!-- TOOLBAR OVERVIEW -->
+    <h2 class="text-2xl font-bold text-white mb-6">Bộ Tool trên Ribbon</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
       
-      <!-- Panel 1: MEP Modeling -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-cyan-500/10 text-cyan-400 rounded-lg"><i class="fa-solid fa-network-wired text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">MEP Modeling</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> Extend Connect</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> Draw MEP</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> <strong>Scan to MEP (Multi)</strong></li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> Connect/Dis MEP (Multi)</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> Snap MEP (Multi)</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-cyan-400"></i> Auto Route</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-network-wired"></i> MEP Modeling
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Extend Connect</li>
+          <li>• Connect/Dis MEP (Multi)</li>
+          <li>• Draw MEP</li>
+          <li>• Snap MEP (Multi)</li>
+          <li>• Scan to MEP (Multi)</li>
+          <li>• Auto Route</li>
         </ul>
       </div>
 
-      <!-- Panel 2: Family & InPlace -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fa-solid fa-cubes text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">Family & InPlace</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-400"></i> Bolt Tool</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-400"></i> Place Box</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-400"></i> Convert InPlace To Family</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-cubes"></i> Family & InPlace
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Bolt Tool</li>
+          <li>• Place Box</li>
+          <li>• Circular Array</li>
+          <li>• Save Element</li>
+          <li>• Convert InPlace To Family</li>
+          <li>• MEP Switch</li>
+          <li>• Show In-Place</li>
         </ul>
       </div>
 
-      <!-- Panel 3: General Utilities -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-lg"><i class="fa-solid fa-sliders text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">General Utilities</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Circular Array</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> MEP Switch</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Move To Point</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Save Element / Show In-Place</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Center Tool / Align Box</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Export View Templates / Set ViewRange</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Check Clash / Workset Owner</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-indigo-400"></i> Line to Struc</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-wrench"></i> General Utilities
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Center Tool</li>
+          <li>• Align Box</li>
+          <li>• Move To Point</li>
+          <li>• Export View Templates</li>
+          <li>• Set ViewRange</li>
+          <li>• Line to Struc</li>
         </ul>
       </div>
 
-      <!-- Panel 4: Clash & Graphic -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-orange-500/10 text-orange-400 rounded-lg"><i class="fa-solid fa-bullseye text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">Clash & Graphic</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-orange-400"></i> Clash Wall</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-orange-400"></i> Reset Color</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-orange-400"></i> Show Edges</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation"></i> Clash & Graphic
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Check Clash</li>
+          <li>• Clash Wall</li>
+          <li>• Workset Owner</li>
+          <li>• Reset Color</li>
+          <li>• Show Edges</li>
+          <li>• 3 Section</li>
         </ul>
       </div>
 
-      <!-- Panel 5: View & PointCloud -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa-solid fa-eye text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">View & Point Cloud</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-400"></i> 3 Section / Delete View Section</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-400"></i> SaveLoad User View / Orient To View</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-400"></i> Switch Normal - RGB (All)</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-400"></i> TurnOff PointCloud</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-400"></i> Manage View Layout / Setting</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-eye"></i> View
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Save/Load UserView</li>
+          <li>• Manage View Layout</li>
+          <li>• Delete View Section</li>
+          <li>• Switch Normal - RGB (All)</li>
+          <li>• Orient To View</li>
+          <li>• TurnOff PointCloud</li>
         </ul>
       </div>
 
-      <!-- Panel 6: About -->
-      <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/40 transition">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 bg-purple-500/10 text-purple-400 rounded-lg"><i class="fa-solid fa-circle-info text-xl"></i></div>
-          <h3 class="text-xl font-bold text-white">About & Help</h3>
-        </div>
-        <ul class="space-y-2 text-sm text-slate-300">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-purple-400"></i> About</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-purple-400"></i> Hướng Dẫn</li>
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-5">
+        <h3 class="font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-circle-info"></i> About
+        </h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li>• Setting</li>
+          <li>• Hướng Dẫn</li>
+          <li>• About</li>
         </ul>
       </div>
+    </div>
 
+    <!-- FEATURES -->
+    <h2 class="text-2xl font-bold text-white mb-6">Tính năng chính</h2>
+    <div class="space-y-4 mb-12">
+      <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-800">
+        <h3 class="font-semibold text-cyan-400">1. Scan to MEP (Multi) & Auto Route</h3>
+        <p class="text-slate-400 text-sm mt-1">Chọn vùng Point Cloud, tool tự động nhận diện và tạo Pipe / Duct / Cable Tray với kích thước và độ dốc phù hợp. Hỗ trợ multi-select.</p>
+      </div>
+      <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-800">
+        <h3 class="font-semibold text-cyan-400">2. Connect / Dis MEP & Extend Connect</h3>
+        <p class="text-slate-400 text-sm mt-1">Tự động nối các đoạn ống, chèn Fitting / Elbow phù hợp hoặc ngắt kết nối nhanh.</p>
+      </div>
+      <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-800">
+        <h3 class="font-semibold text-cyan-400">3. Family Manager & Convert InPlace</h3>
+        <p class="text-slate-400 text-sm mt-1">Quản lý Family, chuyển In-Place sang Family, Place Box, Circular Array, Bolt Tool.</p>
+      </div>
+      <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-800">
+        <h3 class="font-semibold text-cyan-400">4. Check Clash & Workset Owner</h3>
+        <p class="text-slate-400 text-sm mt-1">Kiểm tra va chạm giữa MEP và Point Cloud / Wall. Quản lý Workset Owner nhanh chóng (gói Ultra).</p>
+      </div>
+      <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-800">
+        <h3 class="font-semibold text-cyan-400">5. View Utilities</h3>
+        <p class="text-slate-400 text-sm mt-1">Save/Load User View, quản lý View Layout, Switch Normal-RGB, Orient To View, Turn Off PointCloud.</p>
+      </div>
+    </div>
+
+    <!-- PRICING REMINDER -->
+    <div class="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-500/30 rounded-2xl p-6 text-center">
+      <p class="text-slate-300 mb-4">Xem bảng giá chi tiết và chọn gói phù hợp</p>
+      <a href="index.html#pricing" class="inline-block bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-6 py-2.5 rounded-lg transition">Xem bảng giá →</a>
     </div>
   </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+      © 2026 ScanToBIM pyRevit Extension
+    </div>
+  </footer>
 
 </body>
 </html>
