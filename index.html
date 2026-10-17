@@ -70,7 +70,7 @@
         <!-- Left: content -->
         <div class="text-center lg:text-left">
           <span class="bg-blue-50 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full border border-blue-200">pyRevit Extension for Revit</span>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mt-5 text-slate-900 leading-tight">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mt-5 text-slate-900 leading-tight tracking-tight">
             Automate Scan to BIM Workflows in Revit
           </h1>
           <ul class="mt-6 max-w-xl mx-auto lg:mx-0 text-left space-y-2.5 text-slate-700 text-base md:text-lg">
@@ -89,7 +89,7 @@
           </ul>
           <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
             <a href="#products" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium shadow-lg shadow-blue-500/25 transition">Khám phá Tools</a>
-            <a href="#docs" class="bg-white hover:bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-medium border border-slate-300 transition">Hướng dẫn cài đặt</a>
+            <a href="#products" class="bg-white hover:bg-slate-100 text-slate-700 px-6 py-3 rounded-lg font-medium border border-slate-300 transition">Buy Now</a>
           </div>
         </div>
 
@@ -161,12 +161,12 @@
   </script>
 
   <!-- POINT CLOUD TO BIM COMPARISON SLIDER -->
-  <section id="pointcloud-comparison" class="pb-12 px-4 sm:px-6 lg:px-8">
+  <section id="pointcloud-comparison" class="pb-16 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-8">
+      <div class="text-center mb-10">
         <span class="inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">POINT CLOUD → BIM</span>
         <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">From Scan to Model</h2>
-        <p class="mt-3 max-w-2xl mx-auto text-slate-600">Kéo thanh ở giữa để so sánh dữ liệu Point Cloud với mô hình Revit hoàn thiện.</p>
+        <p class="mt-4 max-w-2xl mx-auto text-slate-600 text-base md:text-lg">Kéo thanh ở giữa để so sánh dữ liệu Point Cloud với mô hình Revit hoàn thiện.</p>
       </div>
 
       <div class="comparison-slider" id="comparison-slider" style="--split: 50%;" role="region" aria-label="So sánh Point Cloud và BIM Model">
@@ -237,36 +237,69 @@
       const updateSlider = function () {
         slider.style.setProperty('--split', range.value + '%');
       };
-      range.addEventListener('input', updateSlider);
+      let animating = false;
+      let rafId = null;
+      range.addEventListener('input', function () {
+        if (animating) {
+          animating = false;
+          if (rafId) cancelAnimationFrame(rafId);
+        }
+        updateSlider();
+      });
+      // Auto demo once on load: 15% → 85%, then stop
+      range.value = 15;
       updateSlider();
+      animating = true;
+      const from = 15, to = 85, duration = 2000;
+      let start = null;
+      function easeInOut(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+      function tick(ts) {
+        if (!animating) return;
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / duration, 1);
+        const val = from + (to - from) * easeInOut(p);
+        range.value = val;
+        updateSlider();
+        if (p < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          animating = false;
+        }
+      }
+      // slight delay so images are ready
+      setTimeout(function () {
+        rafId = requestAnimationFrame(tick);
+      }, 400);
     })();
   </script>
 
   <!-- PRODUCTS SECTION (also Pricing target) -->
-  <section id="products" class="py-12 bg-white border-y border-slate-200">
+  <section id="products" class="py-16 bg-white border-y border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-slate-900">Bộ Công Cụ Theo Chuyên Ngành</h2>
-        <p class="text-slate-600 mt-2">Hai bộ công cụ pyRevit được xây dựng riêng cho từng chuyên ngành — chọn đúng bộ việc bạn cần</p>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Bộ Công Cụ Theo Chuyên Ngành</h2>
+        <p class="text-slate-600 mt-4 text-base md:text-lg max-w-2xl mx-auto">Hai bộ công cụ pyRevit được xây dựng riêng cho từng chuyên ngành — chọn đúng bộ việc bạn cần</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
         
         <!-- CARD 1: SCAN FOR MEP -->
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-cyan-400 hover:shadow-lg transition duration-300 flex flex-col justify-between">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-cyan-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center text-cyan-600 text-2xl mb-6">
               <i class="fa-solid fa-network-wired"></i>
             </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-3">Scan for MEP</h3>
-            <p class="text-slate-600 text-sm mb-6">
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Scan for MEP</h3>
+            <p class="text-slate-600 text-base mb-5 leading-relaxed">
               Chuyển đổi Point Cloud thành mô hình MEP thực tế: tự động tạo Pipe, Duct, Cable Tray khớp đúng vị trí, kích thước và độ dốc từ dữ liệu quét laser.
             </p>
-            <ul class="space-y-3 text-sm text-slate-700 mb-8">
-              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2"></i> Auto-fit Pipe/Duct size từ Point Cloud</li>
-              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2"></i> Tự động kết nối Fitting & Elbow</li>
-              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2"></i> Kiểm tra va chạm Point Cloud & MEP</li>
-              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2"></i> 50+ button tools + Scan tools</li>
+            <ul class="space-y-3 text-base text-slate-700 mb-8">
+              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2.5 shrink-0"></i> Auto-fit Pipe/Duct size từ Point Cloud</li>
+              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2.5 shrink-0"></i> Tự động kết nối Fitting & Elbow</li>
+              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2.5 shrink-0"></i> Kiểm tra va chạm Point Cloud & MEP</li>
+              <li class="flex items-center"><i class="fa-solid fa-check text-cyan-600 mr-2.5 shrink-0"></i> 50+ button tools + Scan tools</li>
             </ul>
           </div>
           <a href="mep.html" class="w-full text-center bg-white hover:bg-cyan-600 hover:text-white text-cyan-700 py-3 rounded-xl font-semibold border border-cyan-300 transition">
@@ -275,19 +308,19 @@
         </div>
 
         <!-- CARD 2: SCAN FOR STRUCTURAL -->
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-blue-400 hover:shadow-lg transition duration-300 flex flex-col justify-between">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-6">
               <i class="fa-solid fa-building-columns"></i>
             </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-3">Scan for Structural</h3>
-            <p class="text-slate-600 text-sm mb-6">
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Scan for Structural</h3>
+            <p class="text-slate-600 text-base mb-5 leading-relaxed">
               Chuyển đổi Point Cloud thành mô hình Kết cấu: tự động trích xuất và dựng Cột, Dầm, Sàn, Tường khớp theo hình dạng thực tế từ dữ liệu quét laser.
             </p>
-            <ul class="space-y-3 text-sm text-slate-700 mb-8">
-              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2"></i> Tự động nhận diện Cột &amp; Dầm thép / Bê tông</li>
-              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2"></i> Tạo Sàn &amp; Tường từ bề mặt Scan</li>
-              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2"></i> Đánh giá độ nghiêng &amp; biến dạng kết cấu</li>
+            <ul class="space-y-3 text-base text-slate-700 mb-8">
+              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2.5 shrink-0"></i> Tự động nhận diện Cột &amp; Dầm thép / Bê tông</li>
+              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2.5 shrink-0"></i> Tạo Sàn &amp; Tường từ bề mặt Scan</li>
+              <li class="flex items-center"><i class="fa-solid fa-check text-blue-600 mr-2.5 shrink-0"></i> Đánh giá độ nghiêng &amp; biến dạng kết cấu</li>
             </ul>
           </div>
           <a href="structural.html" class="w-full text-center bg-white hover:bg-blue-600 hover:text-white text-blue-700 py-3 rounded-xl font-semibold border border-blue-300 transition">
@@ -300,40 +333,40 @@
   </section>
 
   <!-- DEMO VIDEOS SECTION -->
-  <section id="demo-videos" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-8">
+  <section id="demo-videos" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
       <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
         <i class="fa-solid fa-play mr-1.5"></i> XEM TOOL HOẠT ĐỘNG
       </span>
-      <h2 class="mt-4 text-3xl font-bold text-slate-900">Demo quy trình Scan to BIM</h2>
-      <p class="text-slate-600 mt-2 max-w-2xl mx-auto">
+      <h2 class="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Demo quy trình Scan to BIM</h2>
+      <p class="text-slate-600 mt-4 text-base md:text-lg max-w-2xl mx-auto">
         Xem cách bộ công cụ pyRevit chuyển Point Cloud thành mô hình MEP và Kết cấu trong Revit.
       </p>
     </div>
-    <div class="grid sm:grid-cols-2 gap-5">
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
         <video class="w-full aspect-video bg-slate-900 demo-video" controls preload="none" poster="video/thumb1.jpg">
           <source src="video/video 1.mp4" type="video/mp4">
         </video>
-        <p class="text-sm text-slate-700 px-4 py-3 font-medium">Demo Scan to MEP — quy trình dựng ống</p>
+        <p class="text-base text-slate-700 px-4 py-3.5 font-medium">Demo Scan to MEP — quy trình dựng ống</p>
       </div>
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
         <video class="w-full aspect-video bg-slate-900 demo-video" controls preload="none" poster="video/thumb2.jpg">
           <source src="video/video 2.mp4" type="video/mp4">
         </video>
-        <p class="text-sm text-slate-700 px-4 py-3 font-medium">Demo kết nối Fitting &amp; Auto Route</p>
+        <p class="text-base text-slate-700 px-4 py-3.5 font-medium">Demo kết nối Fitting &amp; Auto Route</p>
       </div>
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
         <video class="w-full aspect-video bg-slate-900 demo-video" controls preload="none" poster="video/thumb3.jpg">
           <source src="video/video 3.mp4" type="video/mp4">
         </video>
-        <p class="text-sm text-slate-700 px-4 py-3 font-medium">Demo Scan to Structural — Cột &amp; Dầm</p>
+        <p class="text-base text-slate-700 px-4 py-3.5 font-medium">Demo Scan to Structural — Cột &amp; Dầm</p>
       </div>
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
         <video class="w-full aspect-video bg-slate-900 demo-video" controls preload="none" poster="video/thumb4.jpg">
           <source src="video/video 4.mp4" type="video/mp4">
         </video>
-        <p class="text-sm text-slate-700 px-4 py-3 font-medium">Demo Wall &amp; Floor từ Point Cloud</p>
+        <p class="text-base text-slate-700 px-4 py-3.5 font-medium">Demo Wall &amp; Floor từ Point Cloud</p>
       </div>
     </div>
   </section>
@@ -354,12 +387,12 @@
   </script>
 
   <!-- DOCS SECTION -->
-  <section id="docs" class="py-12 bg-slate-100 border-y border-slate-200">
+  <section id="docs" class="py-16 bg-slate-100 border-y border-slate-200">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4">Docs & Guide</h2>
-      <p class="text-slate-600 mb-8">Hướng dẫn cài đặt và sử dụng tool pyRevit</p>
-      <div class="bg-white border border-slate-200 rounded-2xl p-8 text-left shadow-sm">
-        <ol class="space-y-4 text-slate-700">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Docs & Guide</h2>
+      <p class="text-slate-600 mt-4 mb-10 text-base md:text-lg">Hướng dẫn cài đặt và sử dụng tool pyRevit</p>
+      <div class="bg-white border border-slate-200 rounded-2xl p-8 text-left shadow-sm hover:shadow-md transition-shadow duration-300">
+        <ol class="space-y-5 text-slate-700 text-base">
           <li class="flex gap-3">
             <span class="bg-blue-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
             <span>Cài đặt pyRevit (nếu chưa có) từ <a href="https://pyrevitlabs.github.io/" target="_blank" class="text-blue-600 hover:underline">pyrevitlabs.github.io</a></span>
@@ -382,18 +415,63 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="text-slate-600 text-sm mb-4">Liên hệ hỗ trợ hoặc mua tool:</p>
-      <div class="flex justify-center gap-6 text-sm font-medium text-slate-700 flex-wrap">
-        <a href="mailto:lethanvietltvo@gmail.com" class="hover:text-blue-600 transition">
-          <i class="fa-solid fa-envelope text-blue-600 mr-2"></i>lethanvietltvo@gmail.com
-        </a>
-        <a href="https://zalo.me/0857263521" target="_blank" class="hover:text-blue-600 transition">
-          <i class="fa-solid fa-phone text-blue-600 mr-2"></i>Zalo: 0857263521
-        </a>
+  <footer class="bg-white border-t border-slate-200 py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+        <!-- Brand + version -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="bg-blue-600 p-1.5 rounded-lg">
+              <i class="fa-solid fa-cube text-sm text-white"></i>
+            </div>
+            <span class="font-bold text-slate-900">ScanToBIM Tools</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">pyRevit extension for Scan to BIM workflows in Autodesk Revit.</p>
+          <div class="mt-4 space-y-1.5 text-sm text-slate-600">
+            <p><span class="font-medium text-slate-800">Version:</span> 1.0</p>
+            <p><span class="font-medium text-slate-800">Support:</span> Revit 2021–2026</p>
+            <p><span class="font-medium text-slate-800">License:</span> Commercial</p>
+          </div>
+        </div>
+        <!-- Contact -->
+        <div>
+          <p class="text-sm font-semibold text-slate-900 mb-3">Contact</p>
+          <div class="space-y-2.5 text-sm text-slate-600">
+            <a href="mailto:lethanvietltvo@gmail.com" class="flex items-center gap-2 hover:text-blue-600 transition">
+              <i class="fa-solid fa-envelope text-blue-600 w-4"></i>lethanvietltvo@gmail.com
+            </a>
+            <a href="https://zalo.me/0857263521" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-blue-600 transition">
+              <i class="fa-solid fa-phone text-blue-600 w-4"></i>Zalo: 0857263521
+            </a>
+            <a href="contact.html" class="flex items-center gap-2 hover:text-blue-600 transition">
+              <i class="fa-solid fa-message text-blue-600 w-4"></i>Contact form
+            </a>
+          </div>
+        </div>
+        <!-- Links -->
+        <div>
+          <p class="text-sm font-semibold text-slate-900 mb-3">Links</p>
+          <div class="space-y-2.5 text-sm text-slate-600">
+            <a href="#products" class="block hover:text-blue-600 transition">Products &amp; Pricing</a>
+            <a href="#docs" class="block hover:text-blue-600 transition">Docs &amp; Guide</a>
+            <a href="#demo-videos" class="block hover:text-blue-600 transition">Demo videos</a>
+          </div>
+        </div>
+        <!-- Social / trust -->
+        <div>
+          <p class="text-sm font-semibold text-slate-900 mb-3">Follow</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://github.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-700 hover:border-slate-400 hover:bg-white transition" title="GitHub">
+              <i class="fa-brands fa-github text-lg"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-700 hover:border-slate-400 hover:bg-white transition" title="LinkedIn">
+              <i class="fa-brands fa-linkedin text-lg text-blue-700"></i> LinkedIn
+            </a>
+          </div>
+          <p class="text-xs text-slate-400 mt-4">Cập nhật link GitHub / LinkedIn khi có repo &amp; profile chính thức.</p>
+        </div>
       </div>
-      <p class="text-slate-400 text-xs mt-8">© 2026 ScanToBIM pyRevit Extension. Built with GitHub Pages.</p>
+      <p class="text-slate-400 text-xs mt-10 pt-6 border-t border-slate-100 text-center">© 2026 ScanToBIM pyRevit Extension. Built with GitHub Pages.</p>
     </div>
   </footer>
 
