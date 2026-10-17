@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scan to BIM pyRevit Tools</title>
+  <meta name="description" content="Bộ công cụ pyRevit tự động hóa quy trình Scan to BIM: chuyển Point Cloud thành mô hình MEP và Kết cấu nhanh, chính xác.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -21,19 +23,46 @@
         </div>
         <nav class="hidden md:flex space-x-8 text-sm font-medium">
           <a href="#products" class="text-slate-300 hover:text-blue-400 transition">Products</a>
-          <a href="#pricing" class="text-slate-300 hover:text-blue-400 transition">Pricing</a>
           <a href="#docs" class="text-slate-300 hover:text-blue-400 transition">Docs & Guide</a>
           <a href="contact.html" class="text-slate-300 hover:text-blue-400 transition">Contact</a>
         </nav>
-        <div>
-          <a href="#pricing" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-blue-500/20 transition">Get Tools</a>
+        <div class="flex items-center gap-2">
+          <a href="#products" class="hidden sm:inline-block bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-blue-500/20 transition">Get Tools</a>
+          <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white w-10 h-10 flex items-center justify-center" aria-label="Mở menu" aria-expanded="false">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
         </div>
       </div>
+      <nav id="mobile-menu" class="hidden md:hidden flex flex-col gap-1 pb-4 text-sm font-medium">
+        <a href="#products" class="text-slate-300 hover:text-blue-400 transition py-2">Products</a>
+        <a href="#docs" class="text-slate-300 hover:text-blue-400 transition py-2">Docs & Guide</a>
+        <a href="contact.html" class="text-slate-300 hover:text-blue-400 transition py-2">Contact</a>
+        <a href="#products" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold mt-1 text-center">Get Tools</a>
+      </nav>
     </div>
   </header>
 
+  <script>
+    (function () {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function () {
+        const isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        btn.querySelector('i').className = isOpen ? 'fa-solid fa-bars text-lg' : 'fa-solid fa-xmark text-lg';
+      });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.querySelector('i').className = 'fa-solid fa-bars text-lg';
+      }));
+    })();
+  </script>
+
   <!-- HERO SECTION -->
-  <section class="py-20 px-4 text-center max-w-4xl mx-auto">
+  <section class="pt-14 pb-10 px-4 text-center max-w-4xl mx-auto">
     <span class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/20">pyRevit Extension for Revit</span>
     <h1 class="text-4xl md:text-6xl font-extrabold mt-6 text-white leading-tight">
       Automate Scan to BIM Workflows in Revit
@@ -48,9 +77,9 @@
   </section>
 
   <!-- POINT CLOUD TO BIM COMPARISON SLIDER -->
-  <section id="pointcloud-comparison" class="py-16 px-4 sm:px-6 lg:px-8">
+  <section id="pointcloud-comparison" class="pb-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-10">
+      <div class="text-center mb-8">
         <span class="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300">POINT CLOUD → BIM</span>
         <h2 class="mt-4 text-3xl md:text-4xl font-bold text-white">From Scan to Model</h2>
         <p class="mt-3 max-w-2xl mx-auto text-slate-400">Kéo thanh ở giữa để so sánh dữ liệu Point Cloud với mô hình Revit hoàn thiện.</p>
@@ -165,11 +194,11 @@
   </script>
 
   <!-- PRODUCTS SECTION -->
-  <section id="products" class="py-16 bg-slate-800/50 border-y border-slate-800">
+  <section id="products" class="py-12 bg-slate-800/50 border-y border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white">Chuyên Mục Scan to BIM Tools</h2>
-        <p class="text-slate-400 mt-2">Chọn bộ công cụ chuyên biệt phù hợp với ngành của bạn</p>
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-white">Bộ Công Cụ Theo Chuyên Ngành</h2>
+        <p class="text-slate-400 mt-2">Hai bộ công cụ pyRevit được xây dựng riêng cho từng chuyên ngành — chọn đúng bộ việc bạn cần</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
@@ -221,70 +250,47 @@
     </div>
   </section>
 
-  <!-- PRICING SECTION -->
-  <section id="pricing" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-white">Bảng Giá Tool</h2>
-      <p class="text-slate-400 mt-2">Gói theo năm – cập nhật miễn phí trong thời gian sử dụng</p>
+  <!-- DEMO VIDEOS SECTION -->
+  <section id="demo-videos" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <span class="inline-flex items-center rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
+        <i class="fa-solid fa-flask mr-1.5"></i> VIDEO THỬ NGHIỆM
+      </span>
+      <h2 class="mt-4 text-3xl font-bold text-white">Video Demo</h2>
+      <p class="text-slate-400 mt-2 max-w-2xl mx-auto">
+        Đây là video thử nghiệm quy trình. Video kết quả thực tế khi sử dụng tool sẽ được cập nhật tại đây.
+      </p>
     </div>
-
-    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-      
-      <!-- FREE -->
-      <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-6 flex flex-col">
-        <div class="text-center mb-6">
-          <span class="inline-block bg-slate-600/50 text-slate-300 text-sm font-semibold px-4 py-1 rounded-full">Free</span>
-          <div class="mt-4 text-3xl font-bold text-white">-</div>
-          <p class="text-slate-500 text-sm mt-1">Miễn phí</p>
-        </div>
-        <ul class="space-y-3 text-sm text-slate-300 flex-grow">
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> 50+ button</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> 10+ button scan</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Family Manager</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Check Clash</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Workset Owner</li>
-        </ul>
-        <a id="free-download-btn" href="#" class="mt-6 block text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 rounded-lg transition">Download ↓</a>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden">
+        <video class="w-full aspect-video bg-black" controls preload="none" poster="">
+          <source src="video/video 1.mp4" type="video/mp4">
+        </video>
+        <p class="text-sm text-slate-400 px-4 py-3">Thử nghiệm 1</p>
       </div>
-
-      <!-- PRO -->
-      <div class="bg-gradient-to-b from-orange-900/20 to-slate-900 border border-orange-500/40 rounded-2xl p-6 flex flex-col relative">
-        <div class="text-center mb-6">
-          <span class="inline-block bg-orange-500/20 text-orange-300 text-sm font-semibold px-4 py-1 rounded-full">Pro</span>
-          <div class="mt-4 text-3xl font-bold text-white">1.490.000<span class="text-base font-normal text-slate-400">đ/năm</span></div>
-        </div>
-        <ul class="space-y-3 text-sm text-slate-300 flex-grow">
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> 50+ button</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> 10+ button scan</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> Family Manager</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Check Clash</li>
-          <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark text-red-400 mr-2"></i> Workset Owner</li>
-        </ul>
-        <a href="contact.html" class="mt-6 block text-center bg-orange-600 hover:bg-orange-500 text-white font-semibold py-2.5 rounded-lg transition">Liên hệ →</a>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden">
+        <video class="w-full aspect-video bg-black" controls preload="none" poster="">
+          <source src="video/video 2.mp4" type="video/mp4">
+        </video>
+        <p class="text-sm text-slate-400 px-4 py-3">Thử nghiệm 2</p>
       </div>
-
-      <!-- ULTRA -->
-      <div class="bg-gradient-to-b from-blue-900/30 to-slate-900 border border-blue-500/50 rounded-2xl p-6 flex flex-col relative">
-        <span class="absolute -top-3 right-6 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">BEST VALUE</span>
-        <div class="text-center mb-6">
-          <span class="inline-block bg-blue-500/20 text-blue-300 text-sm font-semibold px-4 py-1 rounded-full">Ultra</span>
-          <div class="mt-4 text-3xl font-bold text-blue-400">2.290.000<span class="text-base font-normal text-slate-400">đ/năm</span></div>
-        </div>
-        <ul class="space-y-3 text-sm text-slate-300 flex-grow">
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> 50+ button</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> 10+ button scan</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> Family Manager</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> Check Clash</li>
-          <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-2"></i> Workset Owner</li>
-        </ul>
-        <a href="contact.html" class="mt-6 block text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-lg transition shadow-lg shadow-blue-500/30">Liên hệ →</a>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden">
+        <video class="w-full aspect-video bg-black" controls preload="none" poster="">
+          <source src="video/video 3.mp4" type="video/mp4">
+        </video>
+        <p class="text-sm text-slate-400 px-4 py-3">Thử nghiệm 3</p>
       </div>
-
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden">
+        <video class="w-full aspect-video bg-black" controls preload="none" poster="">
+          <source src="video/video 4.mp4" type="video/mp4">
+        </video>
+        <p class="text-sm text-slate-400 px-4 py-3">Thử nghiệm 4</p>
+      </div>
     </div>
   </section>
 
   <!-- DOCS SECTION -->
-  <section id="docs" class="py-16 bg-slate-800/30 border-y border-slate-800">
+  <section id="docs" class="py-12 bg-slate-800/30 border-y border-slate-800">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold text-white mb-4">Docs & Guide</h2>
       <p class="text-slate-400 mb-8">Hướng dẫn cài đặt và sử dụng tool pyRevit</p>
@@ -327,38 +333,7 @@
     </div>
   </footer>
 
-  <script>
-    // Update the FREE_DOWNLOAD_URL value in download_urls.txt to change the Free download link.
-    (async function () {
-      const button = document.getElementById('free-download-btn');
-      if (!button) return;
-
-      try {
-        const response = await fetch('download_urls.txt', { cache: 'no-store' });
-        if (!response.ok) throw new Error('Could not load download_urls.txt');
-        const content = await response.text();
-        const line = content.split(/\r?\n/).find(row => row.trim().startsWith('FREE_DOWNLOAD_URL='));
-        const url = line ? line.substring(line.indexOf('=') + 1).trim() : '';
-
-        if (url && /^https?:\/\//i.test(url) && !url.includes('example.com/your-free-download.zip')) {
-          button.href = url;
-          button.target = '_blank';
-          button.rel = 'noopener noreferrer';
-        } else {
-          button.href = '#';
-          button.addEventListener('click', function (event) {
-            event.preventDefault();
-            alert('Hãy cập nhật FREE_DOWNLOAD_URL trong file download_urls.txt trước khi sử dụng nút Download.');
-          });
-        }
-      } catch (error) {
-        button.href = '#';
-        button.addEventListener('click', function (event) {
-          event.preventDefault();
-          alert('Không đọc được download_urls.txt. Hãy đảm bảo file này nằm cùng thư mục với index.html và đã được tải lên GitHub Pages.');
-        });
-      }
-    })();
-  </script>
+  <!-- Free-tier download button script moved to pricing/pricing_MEP.html and
+       pricing/pricing_Struc.html, since the pricing tables now live there. -->
 </body>
 </html>
